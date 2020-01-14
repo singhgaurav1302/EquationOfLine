@@ -6,8 +6,7 @@ TEST(LineEquationTest, GoogleTestSetup)
 {
 }
 
-TEST(LineEquationTest, InvokeLineEquation)
+TEST(LineEquationTest, LineEquationSolver)
 {
-    LineEquationSolver eq;
+    LineEquationSolver<int, int> eq(1, 2, 3, 4);
 }
-
