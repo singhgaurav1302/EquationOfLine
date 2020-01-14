@@ -13,6 +13,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 # the project's entire directory structure.
 #add_subdirectory (Source)
 
+include_directories(Source/include)
 add_executable(test_line_equation Test/LineEquationTest.cpp)
 
 TARGET_LINK_LIBRARIES(test_line_equation gtest gtest_main pthread)
