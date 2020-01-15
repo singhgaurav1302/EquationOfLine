@@ -24,3 +24,9 @@ TEST(LineEquationTest, LineParallelToYAxisGetY)
     LineEquationSolver<int, int> eq(2, 1, 2, 6);
     EXPECT_DOUBLE_EQ(std::numeric_limits<long double>::infinity(), eq.getY(2));
 }
+
+TEST(LineEquationTest, LineEquationGetYForXChar)
+{
+    LineEquationSolver<int, int> eq(1, 4, 5, 10);
+    EXPECT_DOUBLE_EQ(148, eq.getY('a'));
+}

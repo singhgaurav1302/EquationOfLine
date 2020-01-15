@@ -23,7 +23,8 @@ public:
         }
     }
 
-    long double getY(T x)
+    template <typename P>
+    long double getY(P x)
     {
         if (std::isinf(slope_))
         {
