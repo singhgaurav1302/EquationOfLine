@@ -1,3 +1,6 @@
+#include <cmath>
+#include <limits>
+
 template <typename T, typename U>
 class LineEquationSolver
 {
@@ -8,13 +11,25 @@ public:
     {
         long double deltaY = y2_point - y1_point;
         long double deltaX = x2_point - x1_point;
-        slope_ = deltaY / deltaX;
-
-        constantValue_ = y2_point - (slope_ * x2_point);
+        if (deltaX == 0.0)
+        {
+            slope_ = std::numeric_limits<long double>::infinity();
+            constantValue_ = std::numeric_limits<long double>::infinity();
+        }
+        else
+        {
+            slope_ = deltaY / deltaX;
+            constantValue_ = y2_point - (slope_ * x2_point);
+        }
     }
 
-    long double getY(long double x)
+    long double getY(T x)
     {
+        if (std::isinf(slope_))
+        {
+            return slope_;
+        }
+
         return slope_ * x + constantValue_;
     }
 };
