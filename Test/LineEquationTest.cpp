@@ -37,3 +37,9 @@ TEST(LineEquationTest, LinePassingThroughAxisGetYForXAsNeg9)
     LineEquationSolver<int, int> eq(1, 1, 5, 5);
     EXPECT_DOUBLE_EQ(-9, eq.getY(-9));
 }
+
+TEST(LineEquationTest, LineParallelToXAxisGetY)
+{
+    LineEquationSolver<int, int> eq(1, 1, 5, 1);
+    EXPECT_DOUBLE_EQ(1, eq.getY(-99999999));
+}
