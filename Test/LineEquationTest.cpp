@@ -24,7 +24,7 @@ TEST(LineEquationTest, LineParallelToYAxisGetY)
     EXPECT_DOUBLE_EQ(std::numeric_limits<long double>::infinity(), eq.getY(2));
 }
 
-TEST(LineEquationTest, LineEquationGetYForXChar)
+TEST(LineEquationTest, LineEquationGetYForXAsChar)
 {
     LineEquationSolver<int, int> eq(1, 4, 5, 10);
     EXPECT_DOUBLE_EQ(148, eq.getY('a'));
@@ -43,8 +43,32 @@ TEST(LineEquationTest, LineEquationInstantiationWithNonArithmeticType)
 //    LineEquationSolver<int, std::string> eq(1, y1, 5, y2);
 }
 
-TEST(LineEquationTest, LineEquationGetYForXAsDouble)
+TEST(LineEquationTest, LineEquationGetYForX_DataTypeDouble)
 {
     LineEquationSolver<double, double> eq(1.4, 4.3, 5.23, 1000.6);
     EXPECT_NEAR(9108.86, eq.getY(36.4), 0.01);
+}
+
+TEST(LineEquationTest, LineEquationGetYForX_DataTypeShort)
+{
+    LineEquationSolver<short, short> eq(1, 4, 5, 10);
+    EXPECT_DOUBLE_EQ(146.5, eq.getY(96));
+}
+
+TEST(LineEquationTest, LineEquationGetYForX_DataTypeLong)
+{
+    LineEquationSolver<long, long> eq(1L, 4L, 5L, 10L);
+    EXPECT_DOUBLE_EQ(146.5, eq.getY(96));
+}
+
+TEST(LineEquationTest, LineEquationGetYForX_DataTypeBool)
+{
+    LineEquationSolver<bool, bool> eq(false, false, true, true);
+    EXPECT_DOUBLE_EQ(6, eq.getY(6));
+}
+
+TEST(LineEquationTest, LineEquationGetYForX_DataTypeRandom)
+{
+    LineEquationSolver<unsigned int, long long> eq(1, 8, 3, -9L);
+    EXPECT_DOUBLE_EQ(-34.5, eq.getY(6));
 }
