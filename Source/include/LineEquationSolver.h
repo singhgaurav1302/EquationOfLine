@@ -1,7 +1,11 @@
 #include <cmath>
 #include <limits>
+#include <type_traits>
+#include <cassert>
 
-template <typename T, typename U>
+template <typename T, typename U,
+         class = typename std::enable_if<std::is_arithmetic<T>::value && 
+                                         std::is_arithmetic<U>::value>::type>
 class LineEquationSolver
 {
     long double slope_;
@@ -23,7 +27,8 @@ public:
         }
     }
 
-    template <typename P>
+    template <class P, 
+             class = typename std::enable_if<std::is_arithmetic<P>::value>::type>
     long double getY(P x)
     {
         if (std::isinf(slope_))

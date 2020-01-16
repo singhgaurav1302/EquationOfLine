@@ -1,5 +1,4 @@
 #include <gtest/gtest.h>
-
 #include "LineEquationSolver.h"
 
 TEST(LineEquationTest, LinePassingThroughAxisGetYForX)
@@ -30,3 +29,18 @@ TEST(LineEquationTest, LineEquationGetYForXChar)
     LineEquationSolver<int, int> eq(1, 4, 5, 10);
     EXPECT_DOUBLE_EQ(148, eq.getY('a'));
 }
+
+TEST(LineEquationTest, LineEquationGetYForXAsString)
+{
+    LineEquationSolver<int, int> eq(1, 4, 5, 10);
+    eq.getY("string");
+}
+
+TEST(LineEquationTest, LineEquationInstantiationWithNonArithmeticType)
+{
+    std::string y1 = "5";
+    std::string y2 = "10";
+    LineEquationSolver<int, std::string> eq(1, y1, 5, y2);
+}
+
+
