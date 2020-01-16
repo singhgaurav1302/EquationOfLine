@@ -33,14 +33,18 @@ TEST(LineEquationTest, LineEquationGetYForXChar)
 TEST(LineEquationTest, LineEquationGetYForXAsString)
 {
     LineEquationSolver<int, int> eq(1, 4, 5, 10);
-    eq.getY("string");
+//    eq.getY("string");
 }
 
 TEST(LineEquationTest, LineEquationInstantiationWithNonArithmeticType)
 {
     std::string y1 = "5";
     std::string y2 = "10";
-    LineEquationSolver<int, std::string> eq(1, y1, 5, y2);
+//    LineEquationSolver<int, std::string> eq(1, y1, 5, y2);
 }
 
-
+TEST(LineEquationTest, LineEquationGetYForXAsDouble)
+{
+    LineEquationSolver<double, double> eq(1.4, 4.3, 5.23, 1000.6);
+    EXPECT_NEAR(9108.86, eq.getY(36.4), 0.01);
+}
