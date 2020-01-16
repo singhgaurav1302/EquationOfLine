@@ -1,6 +1,6 @@
 #!/bin/sh
 
-mkdir out
+mkdir -p out
 cd out
 cmake ./..
 cmake --build .
