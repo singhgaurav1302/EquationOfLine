@@ -3,18 +3,37 @@
 #include <type_traits>
 #include <cassert>
 
-template <typename T, typename U,
-         class = typename std::enable_if<std::is_arithmetic<T>::value && 
-                                         std::is_arithmetic<U>::value>::type>
+template <typename T, typename U>
+struct Point
+{
+    static_assert(std::is_arithmetic<T>::value &&
+                  std::is_arithmetic<U>::value,
+                  "Only arithmetic data types allowed");
+    T x;
+    U y;
+};
+
+template <typename Point>
+struct is_point : std::false_type {};
+
+template <typename T, typename U>
+struct is_point<Point<T, U>> : std::true_type {};
+
+template <typename Point1, typename Point2>
 class LineEquationSolver
 {
+    static_assert(is_point<Point1>::value &&
+                  is_point<Point2>::value,
+                  "Line equation solver needs Point as parameter");
+
     long double slope_;
     long double constantValue_;
+
 public:
-    LineEquationSolver(T x1_point, U y1_point, T x2_point, U y2_point)
+    LineEquationSolver(Point1 p1, Point2 p2)
     {
-        long double deltaY = y2_point - y1_point;
-        long double deltaX = x2_point - x1_point;
+        long double deltaY = p2.y - p1.y;
+        long double deltaX = p2.x - p1.x;
         if (deltaX == 0.0)
         {
             slope_ = std::numeric_limits<long double>::infinity();
@@ -23,7 +42,7 @@ public:
         else
         {
             slope_ = deltaY / deltaX;
-            constantValue_ = y2_point - (slope_ * x2_point);
+            constantValue_ = p2.y - (slope_ * p2.x);
         }
     }
 
